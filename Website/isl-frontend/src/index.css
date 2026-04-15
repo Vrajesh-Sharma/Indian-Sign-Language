@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand:       #01696f;
+  --color-brand-hover: #0c4e54;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: #030712;
+  color: #f1f5f9;
+  min-height: 100dvh;
+}
+
+/* ─── Layout containers (CSS — always works) ─────────────── */
+.section {
+  width: 100%;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.section-sm { padding-top: 3rem; padding-bottom: 3rem; }
+
+.container {
+  width: 100%;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.container-sm {
+  width: 100%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container, .container-sm { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* ─── Responsive grid ────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── Buttons ────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #01696f; color: #fff; font-weight: 600;
+  font-size: 0.875rem; padding: 0.65rem 1.5rem;
+  border-radius: 0.75rem; border: none; cursor: pointer;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-primary:hover  { background: #0c4e54; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(1,105,111,0.4); }
+.btn-primary:active { transform: none; }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #94a3b8; font-size: 0.875rem; padding: 0.65rem 1.5rem;
+  border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; text-decoration: none; background: transparent;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+/* ─── Typography utilities ───────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #7cb5bc 0%, #01696f 50%, #4f98a3 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.section-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #4f98a3;
+  display: block; margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800; color: #fff; line-height: 1.1;
+}
+.section-sub {
+  font-size: 0.9rem; color: #64748b;
+  max-width: 480px; margin: 0.75rem auto 0; line-height: 1.6;
+}
+
+/* ─── Cards ──────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+}
+.teal-card {
+  background: rgba(1,105,111,0.1);
+  border: 1px solid rgba(1,105,111,0.3);
+  border-radius: 1rem;
+}
+
+/* ─── Marquee ────────────────────────────────────────────── */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ─── Confidence bar ─────────────────────────────────────── */
+@keyframes bar-fill { from { width: 0%; } to { width: var(--bar-w); } }
+.bar-fill { animation: bar-fill 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* ─── Skeleton ───────────────────────────────────────────── */
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #2d3748 50%, #1f2937 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ─── Drag drop ──────────────────────────────────────────── */
+@keyframes border-glow {
+  0%,100% { border-color: #01696f; box-shadow: 0 0 0 0 rgba(1,105,111,0.25); }
+  50%      { border-color: #4f98a3; box-shadow: 0 0 0 6px rgba(1,105,111,0); }
+}
+.drag-active { animation: border-glow 1s ease-in-out infinite; }
+
+/* ─── Fade in up ─────────────────────────────────────────── */
+@keyframes fade-up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fade-up 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ─── Background grid ────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(1,105,111,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1,105,111,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Mobile nav ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .section { padding-top: 3rem; padding-bottom: 3rem; }
+  .section-title { font-size: 1.75rem; }
+}
