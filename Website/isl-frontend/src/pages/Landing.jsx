@@ -106,13 +106,13 @@ function Hero() {
             transition={{ delay: 0.3, duration: 0.6 }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              border: '1px solid rgba(1,105,111,0.4)', background: 'rgba(1,105,111,0.1)',
+              border: '1px solid rgba(217, 119, 6,0.4)', background: 'rgba(217, 119, 6,0.1)',
               borderRadius: 999, padding: '0.35rem 1rem',
-              fontSize: '0.72rem', color: '#4f98a3', marginBottom: '1.75rem',
+              fontSize: '0.72rem', color: '#fbbf24', marginBottom: '1.75rem',
               letterSpacing: '0.04em',
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#01696f', animation: 'border-glow 1.5s ease infinite' }} />
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#d97706', animation: 'border-glow 1.5s ease infinite' }} />
             MobileNetV2 · 36 ISL Classes · HuggingFace Spaces
           </motion.div>
 
@@ -122,7 +122,7 @@ function Hero() {
             style={{ fontWeight: 900, lineHeight: 0.95, marginBottom: '1.25rem', textShadow: '0 12px 40px rgba(0,0,0,0.9)' }}
           >
             <span style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', color: '#fff', display: 'block' }}>Read every</span>
-            <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block', textShadow: '0 12px 40px rgba(1,105,111,0.4)' }}>sign.</span>
+            <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block', textShadow: '0 12px 40px rgba(217, 119, 6,0.4)' }}>sign.</span>
             <span style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'rgba(255,255,255,0.4)', fontWeight: 400, display: 'block', textShadow: '0 8px 30px rgba(0,0,0,0.8)' }}>instantly.</span>
           </motion.h1>
 
@@ -131,7 +131,8 @@ function Hero() {
             transition={{ delay: 0.85, duration: 0.7 }}
             style={{ fontSize: 'clamp(0.875rem, 2vw, 1.05rem)', color: '#cbd5e1', maxWidth: 500, margin: '0 auto 2.25rem', lineHeight: 1.7, textShadow: '0 4px 16px rgba(0,0,0,0.9)', fontWeight: 500 }}
           >
-            Deep learning–powered ISL classifier. Upload a hand gesture image and get instant,
+            Deep learning powered ISL classifier. 
+            <br/>Upload a hand gesture image and get instant,
             accurate recognition backed by a 6-architecture benchmark.
           </motion.p>
 
@@ -157,7 +158,7 @@ function Hero() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-            style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, #01696f, transparent)', margin: '0 auto' }}
+            style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, #d97706, transparent)', margin: '0 auto' }}
           />
         </motion.div>
       </div>
@@ -174,7 +175,7 @@ function Marquee() {
       <div className="marquee-track" style={{ padding: '1.25rem 0', gap: '2.5rem', alignItems: 'center' }}>
         {[...SIGNS, ...SIGNS].map((s, i) => (
           <span key={i} style={{ fontSize: '2.5rem', fontWeight: 900, color: 'rgba(255,255,255,0.03)', cursor: 'default', transition: 'color 200ms' }}
-            onMouseOver={e => e.target.style.color = 'rgba(1,105,111,0.3)'}
+            onMouseOver={e => e.target.style.color = 'rgba(217, 119, 6,0.3)'}
             onMouseOut={e => e.target.style.color = 'rgba(255,255,255,0.03)'}
           >{s}</span>
         ))}
@@ -245,7 +246,7 @@ function HowItWorks() {
               </div>
               <h3 style={{ fontWeight: 700, color: '#fff', marginBottom: '0.5rem', fontSize: '1rem' }}>{step.title}</h3>
               <p style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.65 }}>{step.desc}</p>
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 0%, rgba(1,105,111,0.07), transparent 60%)', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 0%, rgba(217, 119, 6,0.07), transparent 60%)', pointerEvents: 'none' }} />
             </motion.div>
           ))}
         </div>
@@ -286,25 +287,25 @@ function Models() {
               whileHover={{ y: -4, transition: { duration: 0.18 } }}
               style={{
                 borderRadius: '1rem', padding: '1.25rem', position: 'relative', overflow: 'hidden',
-                border: m.win ? '1px solid rgba(1,105,111,0.45)' : '1px solid rgba(255,255,255,0.05)',
-                background: m.win ? 'rgba(1,105,111,0.1)' : 'rgba(15,23,42,0.7)',
+                border: m.win ? '1px solid rgba(217, 119, 6,0.45)' : '1px solid rgba(255,255,255,0.05)',
+                background: m.win ? 'rgba(217, 119, 6,0.1)' : 'rgba(15,23,42,0.7)',
                 cursor: 'default',
               }}
             >
-              {m.win && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, #01696f, transparent)' }} />}
+              {m.win && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, #d97706, transparent)' }} />}
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.875rem' }}>
                 <span style={{ fontSize: '1.25rem' }}>{m.icon}</span>
                 <span style={{
                   fontSize: '0.65rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: 999,
-                  border: m.win ? '1px solid rgba(1,105,111,0.5)' : '1px solid rgba(255,255,255,0.08)',
-                  background: m.win ? 'rgba(1,105,111,0.2)' : 'rgba(255,255,255,0.04)',
-                  color: m.win ? '#4f98a3' : '#475569',
+                  border: m.win ? '1px solid rgba(217, 119, 6,0.5)' : '1px solid rgba(255,255,255,0.08)',
+                  background: m.win ? 'rgba(217, 119, 6,0.2)' : 'rgba(255,255,255,0.04)',
+                  color: m.win ? '#fbbf24' : '#475569',
                 }}>{m.badge}</span>
               </div>
               <h3 style={{ fontWeight: 700, fontSize: '0.9rem', color: m.win ? '#fff' : '#94a3b8', marginBottom: '0.4rem' }}>{m.name}</h3>
               <p style={{ fontSize: '0.78rem', color: '#334155', lineHeight: 1.5 }}>{m.desc}</p>
-              {m.win && <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 0%, rgba(1,105,111,0.12), transparent 55%)', pointerEvents: 'none' }} />}
+              {m.win && <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 0%, rgba(217, 119, 6,0.12), transparent 55%)', pointerEvents: 'none' }} />}
             </motion.div>
           ))}
         </div>
@@ -325,10 +326,10 @@ function CTA() {
           style={{
             padding: 'clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem)',
             textAlign: 'center', position: 'relative', overflow: 'hidden',
-            background: 'radial-gradient(ellipse at 50% -10%, rgba(1,105,111,0.22), #07101e 55%)',
+            background: 'radial-gradient(ellipse at 50% -10%, rgba(217, 119, 6,0.22), #07101e 55%)',
           }}
         >
-          <div style={{ position: 'absolute', top: 0, left: 0, width: 200, height: 200, background: 'rgba(1,105,111,0.1)', borderRadius: '50%', filter: 'blur(60px)', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', top: 0, left: 0, width: 200, height: 200, background: 'rgba(217, 119, 6,0.1)', borderRadius: '50%', filter: 'blur(60px)', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
 
           <motion.div
             animate={{ rotate: [0, 12, -12, 0] }}

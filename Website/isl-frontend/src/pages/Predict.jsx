@@ -6,7 +6,7 @@ import UploadZone from '../components/UploadZone.jsx'
 import PredictionCard from '../components/PredictionCard.jsx'
 import TopFive from '../components/TopFive.jsx'
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://YOUR_USERNAME-isl-recognition-api.hf.space'
+const API_URL = import.meta.env.VITE_API_URL
 
 export default function Predict() {
   const [image,   setImage]   = useState(null)
@@ -54,7 +54,7 @@ export default function Predict() {
               ISL Prediction
             </h1>
             <p style={{ fontSize: '0.875rem', color: '#475569' }}>
-              Upload any hand gesture image — instant deep learning classification
+              Upload any hand gesture image for instant deep learning classification
             </p>
           </div>
 
@@ -70,8 +70,8 @@ export default function Predict() {
               {/* Tip */}
               <div style={{
                 marginTop: '1.5rem', padding: '1rem 1.25rem',
-                borderRadius: '0.875rem', background: 'rgba(1,105,111,0.07)',
-                border: '1px solid rgba(1,105,111,0.18)',
+                borderRadius: '0.875rem', background: 'rgba(217, 119, 6,0.07)',
+                border: '1px solid rgba(217, 119, 6,0.18)',
                 display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
               }}>
                 <span style={{ fontSize: '1rem', flexShrink: 0, marginTop: 2 }}>💡</span>
@@ -141,8 +141,8 @@ export default function Predict() {
                     }}>
                       <div style={{
                         width: 16, height: 16,
-                        border: '2px solid rgba(1,105,111,0.3)',
-                        borderTopColor: '#01696f',
+                        border: '2px solid rgba(217, 119, 6,0.3)',
+                        borderTopColor: '#d97706',
                         borderRadius: '50%',
                         animation: 'spin 0.8s linear infinite',
                       }} />

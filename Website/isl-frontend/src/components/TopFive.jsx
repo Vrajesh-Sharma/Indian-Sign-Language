@@ -1,6 +1,6 @@
 export default function TopFive({ top5 }) {
   const max = top5[0]?.confidence || 100
-  const palette = ['#01696f', '#4f98a3', '#7cb5bc', '#a8ced3', '#cde4e6']
+  const palette = ['#d97706', '#fbbf24', '#fde68a', '#a8ced3', '#cde4e6']
 
   return (
     <div className="glass-card" style={{ padding: '1.75rem' }}>

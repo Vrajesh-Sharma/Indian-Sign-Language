@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand:       #01696f;
-  --color-brand-hover: #0c4e54;
+  --color-brand:       #d97706;
+  --color-brand-hover: #b45309;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -75,13 +75,13 @@ body {
 /* ─── Buttons ────────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #01696f; color: #fff; font-weight: 600;
+  background: #d97706; color: #fff; font-weight: 600;
   font-size: 0.875rem; padding: 0.65rem 1.5rem;
   border-radius: 0.75rem; border: none; cursor: pointer;
   text-decoration: none;
   transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
-.btn-primary:hover  { background: #0c4e54; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(1,105,111,0.4); }
+.btn-primary:hover  { background: #b45309; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217, 119, 6,0.4); }
 .btn-primary:active { transform: none; }
 
 .btn-ghost {
@@ -95,12 +95,12 @@ body {
 
 /* ─── Typography utilities ───────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #7cb5bc 0%, #01696f 50%, #4f98a3 100%);
+  background: linear-gradient(135deg, #fde68a 0%, #d97706 50%, #fbbf24 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .section-label {
   font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
-  text-transform: uppercase; color: #4f98a3;
+  text-transform: uppercase; color: #fbbf24;
   display: block; margin-bottom: 0.75rem;
 }
 .section-title {
@@ -120,8 +120,8 @@ body {
   border-radius: 1rem;
 }
 .teal-card {
-  background: rgba(1,105,111,0.1);
-  border: 1px solid rgba(1,105,111,0.3);
+  background: rgba(217, 119, 6,0.1);
+  border: 1px solid rgba(217, 119, 6,0.3);
   border-radius: 1rem;
 }
 
@@ -145,8 +145,8 @@ body {
 
 /* ─── Drag drop ──────────────────────────────────────────── */
 @keyframes border-glow {
-  0%,100% { border-color: #01696f; box-shadow: 0 0 0 0 rgba(1,105,111,0.25); }
-  50%      { border-color: #4f98a3; box-shadow: 0 0 0 6px rgba(1,105,111,0); }
+  0%,100% { border-color: #d97706; box-shadow: 0 0 0 0 rgba(217, 119, 6,0.25); }
+  50%      { border-color: #fbbf24; box-shadow: 0 0 0 6px rgba(217, 119, 6,0); }
 }
 .drag-active { animation: border-glow 1s ease-in-out infinite; }
 
@@ -157,8 +157,8 @@ body {
 /* ─── Background grid ────────────────────────────────────── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(1,105,111,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1,105,111,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(217, 119, 6,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 119, 6,0.06) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 

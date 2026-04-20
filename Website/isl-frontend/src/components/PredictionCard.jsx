@@ -58,7 +58,7 @@ export default function PredictionCard({ result }) {
             style={{
               '--bar-w': `${conf}%`,
               height: '100%', borderRadius: 999,
-              background: `linear-gradient(90deg, #01696f, ${colors.text})`,
+              background: `linear-gradient(90deg, #d97706, ${colors.text})`,
             }}
           />
         </div>

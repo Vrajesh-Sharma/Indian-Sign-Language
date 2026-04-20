@@ -19,7 +19,7 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
             <div style={{
-              width: 36, height: 36, borderRadius: 9, background: '#01696f',
+              width: 36, height: 36, borderRadius: 9, background: '#d97706',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
               flexShrink: 0,
             }}>🤟</div>
@@ -52,18 +52,6 @@ export default function Header() {
                 >
                   ← Home
                 </Link>
-                {pathname !== '/live' && (
-                  <Link to="/live"
-                    style={{
-                      fontSize: '0.8rem', color: '#64748b', textDecoration: 'none',
-                      transition: 'color 150ms',
-                    }}
-                    onMouseOver={e => e.target.style.color = '#fff'}
-                    onMouseOut={e => e.target.style.color = '#64748b'}
-                  >
-                    📷 Live
-                  </Link>
-                )}
                 {pathname !== '/predict' && (
                   <Link to="/predict"
                     style={{

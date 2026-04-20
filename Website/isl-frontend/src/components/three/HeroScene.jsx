@@ -44,8 +44,8 @@ function SignTile({ sign, position, floatSpeed, delay, rotMul }) {
         <mesh>
           <boxGeometry args={[0.72, 0.72, 0.07]} />
           <meshStandardMaterial
-            color="#012a2d"
-            emissive="#01696f"
+            color="#451a03"
+            emissive="#d97706"
             emissiveIntensity={0.55}
             roughness={0.08}
             metalness={0.9}
@@ -56,7 +56,7 @@ function SignTile({ sign, position, floatSpeed, delay, rotMul }) {
         {/* Subtle glow plane */}
         <mesh position={[0, 0, -0.06]}>
           <planeGeometry args={[1.0, 1.0]} />
-          <meshBasicMaterial color="#01696f" transparent opacity={0.12} />
+          <meshBasicMaterial color="#d97706" transparent opacity={0.12} />
         </mesh>
         {/* Letter */}
         <Text
@@ -92,20 +92,20 @@ function CentralOrb() {
       <mesh ref={mesh}>
         <icosahedronGeometry args={[0.9, 2]} />
         <meshStandardMaterial
-          color="#01696f"
-          emissive="#4f98a3"
+          color="#d97706"
+          emissive="#fbbf24"
           emissiveIntensity={0.9}
           wireframe
         />
       </mesh>
       <mesh ref={ring}>
         <torusGeometry args={[1.5, 0.018, 6, 80]} />
-        <meshBasicMaterial color="#01696f" transparent opacity={0.4} />
+        <meshBasicMaterial color="#d97706" transparent opacity={0.4} />
       </mesh>
       {/* Inner glow sphere */}
       <mesh>
         <sphereGeometry args={[0.55, 16, 16]} />
-        <meshBasicMaterial color="#01696f" transparent opacity={0.15} />
+        <meshBasicMaterial color="#d97706" transparent opacity={0.15} />
       </mesh>
     </group>
   )
@@ -139,9 +139,9 @@ function SceneContent({ mouse }) {
       <fog attach="fog" args={['#030712', 9, 22]} />
 
       <ambientLight intensity={0.15} />
-      <pointLight position={[0, 0, 0]}    intensity={2.5} color="#01696f" distance={18} />
-      <pointLight position={[6, 6, 4]}    intensity={1.2} color="#4f98a3" />
-      <pointLight position={[-6, -4, 2]}  intensity={0.6} color="#7cb5bc" />
+      <pointLight position={[0, 0, 0]}    intensity={2.5} color="#d97706" distance={18} />
+      <pointLight position={[6, 6, 4]}    intensity={1.2} color="#fbbf24" />
+      <pointLight position={[-6, -4, 2]}  intensity={0.6} color="#fde68a" />
       <pointLight position={[0, -8, -4]}  intensity={0.4} color="#013a3d" />
 
       <Stars radius={90} depth={60} count={5000} factor={3.5} saturation={0.2} fade speed={0.4} />

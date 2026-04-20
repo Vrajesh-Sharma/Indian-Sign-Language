@@ -17,9 +17,9 @@ export default function UploadZone({ onImage, loading }) {
       onClick={() => !loading && inputRef.current?.click()}
       className={drag ? 'drag-active' : ''}
       style={{
-        border: `2px dashed ${drag ? '#01696f' : 'rgba(255,255,255,0.1)'}`,
+        border: `2px dashed ${drag ? '#d97706' : 'rgba(255,255,255,0.1)'}`,
         borderRadius: '1.25rem',
-        background: drag ? 'rgba(1,105,111,0.08)' : 'rgba(15,23,42,0.6)',
+        background: drag ? 'rgba(217, 119, 6,0.08)' : 'rgba(15,23,42,0.6)',
         padding: '4rem 2rem',
         cursor: loading ? 'default' : 'pointer',
         textAlign: 'center',
@@ -38,8 +38,8 @@ export default function UploadZone({ onImage, loading }) {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
           <div style={{
             width: 40, height: 40,
-            border: '3px solid rgba(1,105,111,0.3)',
-            borderTopColor: '#01696f',
+            border: '3px solid rgba(217, 119, 6,0.3)',
+            borderTopColor: '#d97706',
             borderRadius: '50%',
             animation: 'spin 0.8s linear infinite',
           }} />
@@ -49,8 +49,8 @@ export default function UploadZone({ onImage, loading }) {
         <>
           <div style={{
             width: 64, height: 64, borderRadius: 16,
-            background: 'rgba(1,105,111,0.15)',
-            border: '1px solid rgba(1,105,111,0.3)',
+            background: 'rgba(217, 119, 6,0.15)',
+            border: '1px solid rgba(217, 119, 6,0.3)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 28, margin: '0 auto 1.25rem',
           }}>🤟</div>
