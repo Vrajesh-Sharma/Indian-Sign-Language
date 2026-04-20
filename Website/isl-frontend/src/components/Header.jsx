@@ -7,9 +7,11 @@ export default function Header() {
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
-      borderBottom: '1px solid rgba(255,255,255,0.05)',
-      background: 'rgba(3,7,18,0.85)',
-      backdropFilter: 'blur(16px)',
+      borderBottom: '1px solid rgba(255,255,255,0.06)',
+      background: 'rgba(3,7,18,0.25)',
+      backdropFilter: 'blur(24px) saturate(160%)',
+      WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     }}>
       <div className="container" style={{ paddingTop: '0.875rem', paddingBottom: '0.875rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -34,9 +36,11 @@ export default function Header() {
           {/* Nav */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             {isHome ? (
-              <Link to="/predict" className="btn-primary" style={{ fontSize: '0.8rem', padding: '0.5rem 1.1rem' }}>
-                Try Demo →
-              </Link>
+              <>
+                <Link to="/predict" className="btn-primary" style={{ fontSize: '0.8rem', padding: '0.5rem 1.1rem' }}>
+                  Try Demo →
+                </Link>
+              </>
             ) : (
               <>
                 <Link to="/" style={{
@@ -48,6 +52,30 @@ export default function Header() {
                 >
                   ← Home
                 </Link>
+                {pathname !== '/live' && (
+                  <Link to="/live"
+                    style={{
+                      fontSize: '0.8rem', color: '#64748b', textDecoration: 'none',
+                      transition: 'color 150ms',
+                    }}
+                    onMouseOver={e => e.target.style.color = '#fff'}
+                    onMouseOut={e => e.target.style.color = '#64748b'}
+                  >
+                    📷 Live
+                  </Link>
+                )}
+                {pathname !== '/predict' && (
+                  <Link to="/predict"
+                    style={{
+                      fontSize: '0.8rem', color: '#64748b', textDecoration: 'none',
+                      transition: 'color 150ms',
+                    }}
+                    onMouseOver={e => e.target.style.color = '#fff'}
+                    onMouseOut={e => e.target.style.color = '#64748b'}
+                  >
+                    Upload
+                  </Link>
+                )}
                 <a
                   href={`${import.meta.env.VITE_API_URL || '#'}/health`}
                   target="_blank" rel="noopener noreferrer"

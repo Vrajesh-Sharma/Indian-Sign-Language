@@ -86,7 +86,7 @@ function Hero() {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            opacity: 0.5,
+            opacity: 0.75,
             zIndex: 0
           }}
         />
@@ -98,9 +98,9 @@ function Hero() {
         </div>
 
         <div style={{ position: 'absolute', inset: '0 0 0 0', background: 'linear-gradient(to top, #030712 0%, transparent 40%)', zIndex: 2, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #030712 0%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120, background: 'linear-gradient(to bottom, #030712 0%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
 
-        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 1.25rem', maxWidth: 760, margin: '0 auto', userSelect: 'none' }}>
+        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '3rem 1.5rem', maxWidth: 860, margin: '0 auto', userSelect: 'none', background: 'radial-gradient(circle at center, rgba(3,7,18,0.65) 0%, rgba(3,7,18,0.3) 40%, transparent 75%)', borderRadius: '50%' }}>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -119,17 +119,17 @@ function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: [0.16,1,0.3,1] }}
-            style={{ fontWeight: 900, lineHeight: 0.95, marginBottom: '1.25rem' }}
+            style={{ fontWeight: 900, lineHeight: 0.95, marginBottom: '1.25rem', textShadow: '0 12px 40px rgba(0,0,0,0.9)' }}
           >
             <span style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', color: '#fff', display: 'block' }}>Read every</span>
-            <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block' }}>sign.</span>
-            <span style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'rgba(255,255,255,0.25)', fontWeight: 300, display: 'block' }}>instantly.</span>
+            <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block', textShadow: '0 12px 40px rgba(1,105,111,0.4)' }}>sign.</span>
+            <span style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'rgba(255,255,255,0.4)', fontWeight: 400, display: 'block', textShadow: '0 8px 30px rgba(0,0,0,0.8)' }}>instantly.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ delay: 0.85, duration: 0.7 }}
-            style={{ fontSize: 'clamp(0.875rem, 2vw, 1.05rem)', color: '#475569', maxWidth: 500, margin: '0 auto 2.25rem', lineHeight: 1.7 }}
+            style={{ fontSize: 'clamp(0.875rem, 2vw, 1.05rem)', color: '#cbd5e1', maxWidth: 500, margin: '0 auto 2.25rem', lineHeight: 1.7, textShadow: '0 4px 16px rgba(0,0,0,0.9)', fontWeight: 500 }}
           >
             Deep learning–powered ISL classifier. Upload a hand gesture image and get instant,
             accurate recognition backed by a 6-architecture benchmark.
