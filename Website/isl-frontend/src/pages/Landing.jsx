@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import Header from '../components/Header.jsx'
 import HeroScene from '../components/three/HeroScene.jsx'
 
@@ -14,74 +14,153 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
 
 /* ── Hero ── */
 function Hero() {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+  const imagesRef = useRef([]);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  useEffect(() => {
+    const frameCount = 192;
+    const context = canvasRef.current?.getContext('2d');
+
+    if (imagesRef.current.length === 0) {
+      for (let i = 1; i <= frameCount; i++) {
+        const img = new Image();
+        const filename = i.toString().padStart(4, '0');
+        img.src = `/frames/${filename}.jpg`;
+        imagesRef.current.push(img);
+      }
+    }
+
+    const renderFrame = (index) => {
+      if (!context || !canvasRef.current) return;
+      const img = imagesRef.current[index];
+      if (img && img.complete && img.naturalWidth > 0) {
+        if (canvasRef.current.width !== img.naturalWidth) {
+          canvasRef.current.width = img.naturalWidth;
+          canvasRef.current.height = img.naturalHeight;
+        }
+        context.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
+      }
+    };
+
+    const firstImg = imagesRef.current[0];
+    if (firstImg) {
+      if (firstImg.complete) {
+        renderFrame(0);
+      } else {
+        firstImg.onload = () => renderFrame(0);
+      }
+    }
+
+    let animationFrameId;
+    const updateLoop = () => {
+      const progress = scrollYProgress.get();
+      const frameIndex = Math.min(
+        frameCount - 1,
+        Math.floor(progress * frameCount)
+      );
+      renderFrame(Math.max(0, frameIndex));
+      animationFrameId = requestAnimationFrame(updateLoop);
+    };
+
+    animationFrameId = requestAnimationFrame(updateLoop);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [scrollYProgress]);
+
   return (
-    <section style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-      <Suspense fallback={<div style={{ position: 'absolute', inset: 0, background: '#030712' }} />}>
-        <HeroScene />
-      </Suspense>
-      <div style={{ position: 'absolute', inset: '0 0 0 0', background: 'linear-gradient(to top, #030712 0%, transparent 40%)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #030712 0%, transparent 100%)', pointerEvents: 'none' }} />
-
-      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 1.25rem', maxWidth: 760, margin: '0 auto', userSelect: 'none' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+    <section ref={containerRef} style={{ position: 'relative', height: '600vh', background: '#030712' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        
+        <canvas 
+          ref={canvasRef}
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            border: '1px solid rgba(1,105,111,0.4)', background: 'rgba(1,105,111,0.1)',
-            borderRadius: 999, padding: '0.35rem 1rem',
-            fontSize: '0.72rem', color: '#4f98a3', marginBottom: '1.75rem',
-            letterSpacing: '0.04em',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.5,
+            zIndex: 0
           }}
-        >
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#01696f', animation: 'border-glow 1.5s ease infinite' }} />
-          MobileNetV2 · 36 ISL Classes · HuggingFace Spaces
-        </motion.div>
+        />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8, ease: [0.16,1,0.3,1] }}
-          style={{ fontWeight: 900, lineHeight: 0.95, marginBottom: '1.25rem' }}
-        >
-          <span style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', color: '#fff', display: 'block' }}>Read every</span>
-          <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block' }}>sign.</span>
-          <span style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'rgba(255,255,255,0.25)', fontWeight: 300, display: 'block' }}>instantly.</span>
-        </motion.h1>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+          <Suspense fallback={<div style={{ position: 'absolute', inset: 0, background: 'transparent' }} />}>
+            <HeroScene />
+          </Suspense>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: 0.85, duration: 0.7 }}
-          style={{ fontSize: 'clamp(0.875rem, 2vw, 1.05rem)', color: '#475569', maxWidth: 500, margin: '0 auto 2.25rem', lineHeight: 1.7 }}
-        >
-          Deep learning–powered ISL classifier. Upload a hand gesture image and get instant,
-          accurate recognition backed by a 6-architecture benchmark.
-        </motion.p>
+        <div style={{ position: 'absolute', inset: '0 0 0 0', background: 'linear-gradient(to top, #030712 0%, transparent 40%)', zIndex: 2, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #030712 0%, transparent 100%)', zIndex: 2, pointerEvents: 'none' }} />
+
+        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 1.25rem', maxWidth: 760, margin: '0 auto', userSelect: 'none' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              border: '1px solid rgba(1,105,111,0.4)', background: 'rgba(1,105,111,0.1)',
+              borderRadius: 999, padding: '0.35rem 1rem',
+              fontSize: '0.72rem', color: '#4f98a3', marginBottom: '1.75rem',
+              letterSpacing: '0.04em',
+            }}
+          >
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#01696f', animation: 'border-glow 1.5s ease infinite' }} />
+            MobileNetV2 · 36 ISL Classes · HuggingFace Spaces
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: [0.16,1,0.3,1] }}
+            style={{ fontWeight: 900, lineHeight: 0.95, marginBottom: '1.25rem' }}
+          >
+            <span style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', color: '#fff', display: 'block' }}>Read every</span>
+            <span className="gradient-text" style={{ fontSize: 'clamp(3.5rem, 10vw, 7.5rem)', display: 'block' }}>sign.</span>
+            <span style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'rgba(255,255,255,0.25)', fontWeight: 300, display: 'block' }}>instantly.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 0.85, duration: 0.7 }}
+            style={{ fontSize: 'clamp(0.875rem, 2vw, 1.05rem)', color: '#475569', maxWidth: 500, margin: '0 auto 2.25rem', lineHeight: 1.7 }}
+          >
+            Deep learning–powered ISL classifier. Upload a hand gesture image and get instant,
+            accurate recognition backed by a 6-architecture benchmark.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.55 }}
+            style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <Link to="/predict" className="btn-primary" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
+              🤟 Try Live Demo
+            </Link>
+            <a href="#how-it-works" className="btn-ghost" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
+              How it works ↓
+            </a>
+          </motion.div>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.55 }}
-          style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
+          style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', pointerEvents: 'none', zIndex: 10 }}
         >
-          <Link to="/predict" className="btn-primary" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
-            🤟 Try Live Demo
-          </Link>
-          <a href="#how-it-works" className="btn-ghost" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
-            How it works ↓
-          </a>
+          <span style={{ fontSize: '0.6rem', color: '#1e293b', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, #01696f, transparent)', margin: '0 auto' }}
+          />
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
-        style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', pointerEvents: 'none' }}
-      >
-        <span style={{ fontSize: '0.6rem', color: '#1e293b', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-          style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, #01696f, transparent)', margin: '0 auto' }}
-        />
-      </motion.div>
     </section>
   )
 }
