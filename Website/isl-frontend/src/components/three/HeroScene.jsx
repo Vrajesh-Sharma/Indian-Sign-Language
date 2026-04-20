@@ -135,7 +135,7 @@ function CameraRig({ mouse }) {
 function SceneContent({ mouse }) {
   return (
     <>
-      <color attach="background" args={['#030712']} />
+      {/* Background color removed to allow seeing the underlying video */ }
       <fog attach="fog" args={['#030712', 9, 22]} />
 
       <ambientLight intensity={0.15} />
@@ -174,7 +174,7 @@ export default function HeroScene() {
     >
       <Canvas
         camera={{ position: [0, 0, 11], fov: 58 }}
-        gl={{ antialias: true, alpha: false }}
+        gl={{ antialias: true, alpha: true }}
         dpr={[1, 1.5]}
         performance={{ min: 0.5 }}
       >
