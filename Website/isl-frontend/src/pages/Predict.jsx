@@ -6,7 +6,7 @@ import UploadZone from '../components/UploadZone.jsx'
 import PredictionCard from '../components/PredictionCard.jsx'
 import TopFive from '../components/TopFive.jsx'
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
 
 export default function Predict() {
   const [image,   setImage]   = useState(null)

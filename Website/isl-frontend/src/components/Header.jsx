@@ -37,6 +37,15 @@ export default function Header() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             {isHome ? (
               <>
+                <Link to="/live" style={{
+                  fontSize: '0.8rem', color: '#64748b', textDecoration: 'none',
+                  transition: 'color 150ms', marginRight: '0.5rem'
+                }}
+                  onMouseOver={e => e.target.style.color = '#fff'}
+                  onMouseOut={e => e.target.style.color = '#64748b'}
+                >
+                  Live Camera
+                </Link>
                 <Link to="/predict" className="btn-primary" style={{ fontSize: '0.8rem', padding: '0.5rem 1.1rem' }}>
                   Try Demo →
                 </Link>
@@ -62,6 +71,18 @@ export default function Header() {
                     onMouseOut={e => e.target.style.color = '#64748b'}
                   >
                     Upload
+                  </Link>
+                )}
+                {pathname !== '/live' && (
+                  <Link to="/live"
+                    style={{
+                      fontSize: '0.8rem', color: '#64748b', textDecoration: 'none',
+                      transition: 'color 150ms',
+                    }}
+                    onMouseOver={e => e.target.style.color = '#fff'}
+                    onMouseOut={e => e.target.style.color = '#64748b'}
+                  >
+                    Live Camera
                   </Link>
                 )}
                 <a

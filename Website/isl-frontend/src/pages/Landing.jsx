@@ -142,7 +142,10 @@ function Hero() {
             style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <Link to="/predict" className="btn-primary" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
-              🤟 Try Live Demo
+              🤟 Upload Image
+            </Link>
+            <Link to="/live" className="btn-ghost" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem', border: '1px solid rgba(217, 119, 6, 0.5)', color: '#fbbf24' }}>
+              📷 Live Camera
             </Link>
             <a href="#how-it-works" className="btn-ghost" style={{ fontSize: '0.9rem', padding: '0.75rem 1.75rem' }}>
               How it works ↓
@@ -343,9 +346,14 @@ function CTA() {
           <p style={{ fontSize: '0.9rem', color: '#475569', maxWidth: 440, margin: '0 auto 2rem', lineHeight: 1.65 }}>
             Upload any ISL hand gesture and our AI identifies it in real time with a confidence score and top-5 breakdown.
           </p>
-          <Link to="/predict" className="btn-primary" style={{ fontSize: '0.95rem', padding: '0.85rem 2.25rem' }}>
-            Open Prediction Tool →
-          </Link>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/predict" className="btn-primary" style={{ fontSize: '0.95rem', padding: '0.85rem 2.25rem' }}>
+              Open Image Upload →
+            </Link>
+            <Link to="/live" className="btn-ghost" style={{ fontSize: '0.95rem', padding: '0.85rem 2.25rem', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.05)' }}>
+              Open Live Camera →
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
